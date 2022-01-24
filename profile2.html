@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>SB Admin 2 - Tables</title>
+
+    <!-- Custom fonts for this template -->
+    <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link
+        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+        rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="./css/sb-admin-2.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this page -->
+    <link href="./vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+</head>
+
+<body id="page-top">
+
+    <!-- Page Wrapper -->
+    <div id="wrapper">
+
+        <!-- Content Wrapper -->
+        <div id="content-wrapper" class="d-flex flex-column">
+
+
+
+            <!-- Main Content Start -->
+            <div id="content">
+
+                <!-- Main Content -->
+                <div class="container-fluid">
+
+                    <p>หมายเลขโทรศัพท์ : 000-000-0000</p>
+                    <p>จำนวน MM Coin : 1,000 เหรียญ</p>
+                    <p>บัญชีรับโอนเงิน</p>
+                    <div class="card-body">
+                        <div class="table">
+                            <table>
+                                <tr>
+                                    <td>บัญชีรับโอนเงิน</td>
+                                    <td></td>
+                                    <td>
+                                        <button type="button" class="btn btn-outline-primary btn-sm" data-toggle="modal"
+                                            data-target="#addbankaccount">เพิมบัญชี</button>
+                                        <!-- Modal -->
+                                        <div class="modal fade" id="addbankaccount" role="dialog">
+                                            <div class="modal-dialog">
+
+                                                <!-- Modal content-->
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h4 class="modal-title">เพิมบัญชี</h4>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <div class="table">
+                                                            <table>
+                                                                <tr>
+                                                                    <td>ธนาคาร :</td>
+                                                                    <td><select class="form-select"
+                                                                            aria-label="Default select example">
+                                                                            <option selected>โปรดระบุชื่อธนาคาร /
+                                                                                บัญชีพร้อมเพย์</option>
+                                                                            <option value="1">ธนาคารไทยพาณิชย์</option>
+                                                                            <option value="2">ธนาคารกสิกรไทย</option>
+                                                                            <option value="3">บัญชีพร้อมเพย์</option>
+                                                                        </select>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>เลขที่บัญชี :</td>
+                                                                    <td><input id="bankno" placeholder="Enter Bank No"
+                                                                            name="bankno"></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>ชื่อบัญชี :</td>
+                                                                    <td><input id="bankname"
+                                                                            placeholder="Enter Bank Account Name"
+                                                                            name="bankname"></td>
+                                                                </tr>
+                                                            </table>
+                                                        </div>
+
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-default"
+                                                            data-dismiss="modal">ยกเลิก</button>
+                                                        <button type="button" class="btn btn-default"
+                                                            data-dismiss="modal">เพิ่มบัญชี</button>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+
+                        </div>
+
+
+                        </td>
+                        </tr>
+                        <tr>
+                            <td>ธนาคาร</td>
+                            <td>เลขที่บัญชี</td>
+                            <td>ชื่อบัญชี</td>
+                        </tr>
+                        <tr>
+                            <td>ธนาคารไทยพาณิชย์</td>
+                            <td>000-0-00000-0</td>
+                            <td>Morning Moon Village Market</td>
+                        </tr>
+                        <tr>
+                            <td>ธนาคารกสิกรไทย</td>
+                            <td>000-0-00000-0</td>
+                            <td>Morning Moon Village Market</td>
+                        </tr>
+
+
+                        </table>
+                    </div>
+
+
+
+                </div>
+
+            </div>
+
+
+
+
+
+
+
+        </div>
+
+    </div>
+    <!-- Main Content End -->
+
+
+
+    </div>
+    <!-- End of Content Wrapper -->
+
+    </div>
+    <!-- End of Page Wrapper -->
+
+    <!-- Scroll to Top Button-->
+    <a class="scroll-to-top rounded" href="#page-top">
+        <i class="fas fa-angle-up"></i>
+    </a>
+
+
+    <!-- Bootstrap core JavaScript-->
+    <script src="./vendor/jquery/jquery.min.js"></script>
+    <script src="./vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Core plugin JavaScript-->
+    <script src="./vendor/jquery-easing/jquery.easing.min.js"></script>
+
+    <!-- Custom scripts for all pages-->
+    <script src="./js/sb-admin-2.min.js"></script>
+
+    <!-- Page level plugins -->
+    <script src="./vendor/datatables/jquery.dataTables.min.js"></script>
+    <script src="./vendor/datatables/dataTables.bootstrap4.min.js"></script>
+
+    <!-- Page level custom scripts -->
+    <script src="./js/demo/datatables-demo.js"></script>
+
+
+</body>
+
+</html>

@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang='en'>
+
+<head>
+
+  <meta charset='UTF-8'>
+
+  <link rel='apple-touch-icon' type='image/png'
+    href='https://cpwebassets.codepen.io/assets/favicon/apple-touch-icon-5ae1a0698dcc2402e9712f7d01ed509a57814f994c660df9f7a952f3060705ee.png' />
+  <meta name='apple-mobile-web-app-title' content='CodePen'>
+
+  <link rel='shortcut icon' type='image/x-icon'
+    href='https://cpwebassets.codepen.io/assets/favicon/favicon-aec34940fbc1a6e787974dcd360f2c6b63348d4b1f4e06c77743096d55480f33.ico' />
+
+  <link rel='mask-icon' type='image/x-icon'
+    href='https://cpwebassets.codepen.io/assets/favicon/logo-pin-8f3771b1072e3c38bd662872f6b673a722f4b3ca2421637d5596661b4e2132cc.svg'
+    color='#111' />
+
+
+  <title>CodePen - Simple Drag and Drop Lean Kanban Board Tool</title>
+
+  <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css'>
+
+  <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.css'>
+
+  <style>
+    @import url('https://fonts.googleapis.com/css?family=Arimo:400,700|Roboto+Slab:400,700');
+
+    :root {
+      font-size: calc(0.5vw + 1vh);
+    }
+
+    * {
+      -webkit-box-sizing: border-box;
+      box-sizing: border-box;
+    }
+
+    body {
+      min-width: 420px;
+    }
+
+    h1,
+    h4 {
+      font-family: 'Arimo', sans-serif;
+      line-height: 1.3;
+    }
+
+    header h1 {
+      font-size: 2.4rem;
+      margin: 4rem auto;
+    }
+
+    span {
+      font-size: 3rem;
+    }
+
+    p {
+      font-family: 'Roboto Slab', serif;
+    }
+
+    a,
+    a:link,
+    a:active,
+    a:visited {
+      color: #0066aa;
+      text-decoration: none;
+      border-bottom: #000013 0.16rem solid;
+    }
+
+    a:hover {
+      color: #000013;
+      border-bottom: #0066aa 0.16rem solid;
+    }
+
+    header,
+    footer {
+      width: 40rem;
+      margin: 2rem auto;
+      text-align: center;
+    }
+
+    .add-task-container {
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex;
+      width: 20rem;
+      height: 5.3rem;
+      margin: auto;
+      background: #a8a8a8;
+      border: #000013 0.2rem solid;
+      border-radius: 0.2rem;
+      padding: 0.4rem;
+    }
+
+    .main-container {
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex;
+    }
+
+    .columns {
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-box-align: start;
+      -ms-flex-align: start;
+      align-items: flex-start;
+      margin: 1.6rem auto;
+    }
+
+    .column {
+      width: 8.4rem;
+      margin: 0 0.6rem;
+      background: #a8a8a8;
+      border: #000013 0.2rem solid;
+      border-radius: 0.2rem;
+    }
+
+    .column-header {
+      padding: 0.1rem;
+      border-bottom: #000013 0.2rem solid;
+    }
+
+    .column-header h4 {
+      text-align: center;
+    }
+
+    .to-do-column .column-header {
+      background: #ff872f;
+    }
+
+    .resource-column .column-header {
+      background: #13a4d9;
+    }
+
+    .done-column .column-header {
+      background: #15d072;
+    }
+
+    .cosmetics-column .column-header {
+      background: #ff4444;
+    }
+
+    
+    .consumable-column .column-header {
+      background: #fcff44;
+    }
+
+    .treasure-column .column-header {
+      background: #15d072;
+    }
+
+    .equipment-column .column-header {
+      background: #ff872f;
+    }
+
+    .trade-column .column-header {
+      background: #ffffff;
+    }
+
+    .task-list {
+      min-height: 3rem;
+    }
+
+    ul {
+      list-style-type: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    li {
+      list-style-type: none;
+    }
+
+    .column-button {
+      text-align: center;
+      padding: 0.1rem;
+    }
+
+    .button {
+      font-family: 'Arimo', sans-serif;
+      font-weight: 700;
+      border: #000013 0.14rem solid;
+      border-radius: 0.2rem;
+      color: #000013;
+      padding: 0.6rem 1rem;
+      margin-bottom: 0.3rem;
+      cursor: pointer;
+    }
+
+    .delete-button {
+      background-color: #ff4444;
+      margin: 0.1rem auto 0.6rem auto;
+    }
+
+    .delete-button:hover {
+      background-color: #fa7070;
+    }
+
+    .add-button {
+      background-color: #ffcb1e;
+      padding: 0 1rem;
+      height: 2.8rem;
+      width: 10rem;
+      margin-top: 0.6rem;
+    }
+
+    .add-button:hover {
+      background-color: #ffdd6e;
+    }
+
+    .task {
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-box-pack: center;
+      -ms-flex-pack: center;
+      justify-content: center;
+      vertical-align: middle;
+      list-style-type: none;
+      background: #fff;
+      -webkit-transition: all 0.3s;
+      transition: all 0.3s;
+      margin: 0.4rem;
+      height: 4rem;
+      /*width: auto;*/
+      border: #000013 0.15rem solid;
+      border-radius: 0.2rem;
+      cursor: move;
+      text-align: center;
+      vertical-align: middle;
+    }
+
+    #taskText {
+      background: #fff;
+      border: #000013 0.15rem solid;
+      border-radius: 0.2rem;
+      text-align: center;
+      font-family: 'Roboto Slab', serif;
+      height: 4rem;
+      width: 7rem;
+      margin: auto 0.8rem auto 0.1rem;
+    }
+
+    .task p {
+      margin: auto;
+    }
+
+    /* Dragula CSS Release 3.2.0 from: https://github.com/bevacqua/dragula */
+
+    .gu-mirror {
+      position: fixed !important;
+      margin: 0 !important;
+      z-index: 9999 !important;
+      opacity: 0.8;
+      -ms-filter: 'progid:DXImageTransform.Microsoft.Alpha(Opacity=80)';
+      filter: alpha(opacity=80);
+    }
+
+    .gu-hide {
+      display: none !important;
+    }
+
+    .gu-unselectable {
+      -webkit-user-select: none !important;
+      -moz-user-select: none !important;
+      -ms-user-select: none !important;
+      user-select: none !important;
+    }
+
+    .gu-transit {
+      opacity: 0.2;
+      -ms-filter: 'progid:DXImageTransform.Microsoft.Alpha(Opacity=20)';
+      filter: alpha(opacity=20);
+    }
+
+    /*div 
+      display: none;
+      /*border: 1px solid #000;
+      height: 30px;
+      width: 290px;
+      margin-left: 10px;*/
+    
+/*
+    a:hover+div 
+      display: block;
+
+    
+    */
+  </style>
+
+  <script>
+    window.console = window.console || function (t) { };
+  </script>
+
+
+
+  <script>
+    if (document.location.search.match(/type=embed/gi)) {
+      window.parent.postMessage('resize', '*');
+    }
+  </script>
+
+
+
+
+</head>
+
+<body>
+
+  <div class='main-container'>
+    <ul class='columns'>
+
+      <li class='column cosmetics-column'>
+        <div class='column-header'>
+          <h4>Cosmetics</h4>
+        </div>
+        <ul class='task-list' id='cosmetics'>
+          
+          <li class=task>
+            <div title="Skin Bitkub Mascot : to wear it">
+              <img src="../img/MMV/Skin_BitkubMascot.png" width="35px">
+            </div>
+          </li>
+          <li class=task>
+            <div title="Skin Creamy Bear : to wear it">
+              <img src="../img/MMV/Skin_CreamyBear.png" width="35px">
+            </div>
+          </li>
+          <li class=task>
+            <div title="Skin MU : to wear it">
+              <img src="../img/MMV/Skin_MU.png" width="35px">
+            </div>
+          </li>
+          
+        </ul>
+      </li>
+
+      <li class='column equipment-column'>
+        <div class='column-header'>
+          <h4>Equipment</h4>
+        </div>
+        <ul class='task-list' id='equipment'>
+          
+ 
+          <li class=task>
+            <div title="Stone Axe : -6% energy">
+              <img src="../img/MMV/Axe_StoneAxe.png" width="35px">
+            </div>
+          </li>
+          <li class=task>
+            <div title="Bone Hammer : -7% energy">
+              <img src="../img/MMV/Hammer_Bone Hammer.png" width="35px">
+            </div>
+          </li>
+        </ul>
+      </li>
+
+      <li class='column consumable-column'>
+        <div class='column-header'>
+          <h4>Consumable</h4>
+        </div>
+        <ul class='task-list' id='consumable'>
+          
+          <li class=task>
+            <div title="Green Apple : to eat it">
+              <img src="../img/MMV/Item_GreenApple.png" width="35px">
+            </div>
+          </li>
+          <li class=task>
+            <div title="Apple : to eat it">
+              <img src="../img/MMV/Item_Apple.png" width="35px">
+            </div>
+          </li>
+          <li class=task>
+            <div title="Honey Comb : to eat it">
+              <img src="../img/MMV/Item_HoneyComb.png" width="35px">
+            </div>
+          </li>
+        </ul>
+      </li>
+
+      <li class='column treasure-column'>
+        <div class='column-header'>
+          <h4>Treasure</h4>
+        </div>
+        <ul class='task-list' id='treasure'>
+          
+          <li class=task>
+            <div title="Primrose : for sell only">
+              <img src="../img/MMV/Flower_Primrose.png" width="35px">
+            </div>
+          </li>
+          <li class=task>
+            <div title="Tulip : for sell only">
+              <img src="../img/MMV/Flower_Tulip.png" width="35px">
+            </div>
+          </li>
+          <li class=task>
+            <div title="Alexandrite : for sell only">
+              <img src="../img/MMV/Gemstone_Alexandrite.png" width="35px">
+            </div>
+          </li>
+          <li class=task>
+            <div title="Blue Diamond : for sell only">
+              <img src="../img/MMV/Gemstone_Blue Diamond.png" width="35px">
+            </div>
+          </li>
+        </ul>
+      </li>
+
+      <li class='column resource-column'>
+        <div class='column-header'>
+          <h4>Resource</h4>
+        </div>
+        <ul class='task-list' id='resource'>
+          
+          <li class=task>
+            <div title="Seed Carbage : to plant it">
+              <img src="../img/MMV/seed_cabbage.png" width="35px">
+            </div>
+          </li>
+          <li class=task>
+            <div title="Seed Carrot : to plant it">
+              <img src="../img/MMV/seed_Carrot.png" width="35px">
+            </div>
+          </li>
+        </ul>
+      </li>
+
+      <li class='column trade-column'>
+        <div class='column-header'>
+          <h4>Trade</h4>
+        </div>
+        <ul class='task-list' id='trade'>
+        </ul>
+      </li>
+
+    </ul>
+  </div>
+
+
+  
+  <script
+    src='https://cpwebassets.codepen.io/assets/common/stopExecutionOnTimeout-1b93190375e9ccc259df3a57c1abc0e64599724ae30d7ea4c6877eb615f89387.js'></script>
+
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/dragula/3.7.2/dragula.js'></script>
+  <script id='rendered-js' type='module'>
+    /* Custom Dragula JS */
+    /* Custom Dragula JS */
+    dragula([
+      document.getElementById("cosmetics"),
+      document.getElementById("equipment"),
+      document.getElementById("consumable"),
+      document.getElementById("treasure"),
+      document.getElementById("resource"),
+      document.getElementById("trade")
+    ]);
+    removeOnSpill: false
+      .on("drag", function (el) {
+        el.className.replace("ex-moved", "");
+      })
+      .on("drop", function (el) {
+        el.className += "ex-moved";
+      })
+      .on("over", function (el, container) {
+        container.className += "ex-over";
+      })
+      .on("out", function (el, container) {
+        container.className.replace("ex-over", "");
+      });
+
+    /* Vanilla JS to add a new task */
+    function addTask() {
+      /* Get task text from input */
+      var inputTask = document.getElementById("taskText").value;
+      /* Add task to the 'To Do' column */
+      document.getElementById("to-do").innerHTML +=
+        "<li class='task'><p>" + inputTask + "</p></li>";
+      /* Clear task text from input after adding task */
+      document.getElementById("taskText").value = "";
+    }
+
+    /* Vanilla JS to delete tasks in 'Trash' column */
+    function emptyTrash() {
+      /* Clear tasks from 'Trash' column */
+      document.getElementById("trash").innerHTML = "";
+    }
+
+  </script>
+
+</body>
+
+</html>

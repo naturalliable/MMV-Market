@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+  <meta charset="UTF-8">
+  <title></title>
+  <meta name="description" content="" />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#157878">
+  <link href="//fonts.googleapis.com/css?family=Open+Sans:400,700" rel='stylesheet' type='text/css'>
+
+  <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+  <link rel="stylesheet" href="./indexstyle.css">
+  <link rel="stylesheet" href="./jquery.gridstrap.css">
+
+  <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+  <!--[if lt IE 9]>
+      <script src="//oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="//oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+
+<body>
+  <section class="page-header header-bg">
+    <h1 class="project-name">gridstrap.js</h1>
+    <h2 class="project-tagline"></h2>
+
+    <a href="//github.com/rosspi/gridstrap.js" class="btn btn-top" target="_blank">View on GitHub</a>
+
+
+  </section>
+
+  <section class="main-content">
+    <p><a href="//github.com/rosspi/gridstrap.js" target="_blank">gridstrap.js</a> is a jQuery plugin designed to take
+      Bootstrap's responsive <a href="//getbootstrap.com/css/#grid" target="_blank">grid</a> system and turn it into a
+      managed draggable and resizeable grid while truely maintaining its responsive behaviour. It will also work with
+      any kind of CSS-driven layout.</p>
+    <p>I made this plugin to fill a gap that existed for easily creating Bootstrap-based drag 'n' drop grid interfaces.
+    </p>
+    <p>Both gridster.js and gridstack.js inspired this plugin.</p>
+
+    <h1 id="header-1"><a href="#header-1"></a>Demo</h1>
+
+    <!-- Nav tabs -->
+    <ul class="nav nav-tabs" role="tablist">
+      <li role="presentation" class="active">
+        <a href="#basic-demo" aria-controls="basic-demo" role="tab" data-toggle="tab">Basic</a>
+      </li>
+      <li role="presentation">
+        <a href="#responsive-demo" aria-controls="responsive-demo" role="tab" data-toggle="tab">Responsive</a>
+      </li>
+      <li role="presentation">
+        <a href="#nested-demo" aria-controls="nested-demo" role="tab" data-toggle="tab">Nested</a>
+      </li>
+      <li role="presentation">
+        <a href="#resize-demo" aria-controls="resize-demo" role="tab" data-toggle="tab">Resize</a>
+      </li>
+      <li role="presentation">
+        <a href="#noncontiguous-demo" aria-controls="noncontiguous-demo" role="tab" data-toggle="tab">Non-contiguous</a>
+      </li>
+      <li role="presentation">
+        <a href="#dual-demo" aria-controls="dual-demo" role="tab" data-toggle="tab">Dual</a>
+      </li>
+      <li role="presentation">
+        <a href="#custom-demo" aria-controls="custom-demo" role="tab" data-toggle="tab">Custom</a>
+      </li>
+      <li role="presentation">
+        <a href="#api-demo" aria-controls="api-demo" role="tab" data-toggle="tab">API</a>
+      </li>
+    </ul>
+
+    <!-- Tab panes -->
+    <div class="tab-content">
+      <div role="tabpanel" class="tab-pane active" id="basic-demo">
+        <div id="basic-grid">
+        </div>
+        <div class="row">
+          <div class="col-xs-12">
+            <pre><code class="language-javascript"><div id='basic-grid' class='row'>
+    <div class='col-xs-4 col-sm-2 col-md-1'></div>
+    <div class='col-xs-4 col-sm-2 col-md-1'></div>
+    ...
+</div>
+
+<script>
+  $('#basic-grid').gridstrap();
+</script></code></pre>
+          </div>
+        </div>
+      </div>
+      <div role="tabpanel" class="tab-pane" id="responsive-demo">
+        <iframe style="width:500px;" id="ff" src="./responsive.html">
+        </iframe>
+        <div class="row">
+          <div class="col-xs-12">
+            <pre><code class="language-javascript"><script>
+              // The above grid is within an iframe to demonstrate its responsive behaviour. 
+              // It is otherwise the same as the basic demo.
+              $('#responsive-grid').gridstrap();
+            </script></code></pre>
+          </div>
+        </div>
+      </div>
+      <div role="tabpanel" class="tab-pane" id="nested-demo">
+        <div id="nested-grid">
+        </div>
+        <div class="row">
+          <div class="col-xs-12">
+            <pre><code class="language-javascript"><div id='nested-grid' class='row'>
+    <div class='col-xs-4 col-sm-2 col-md-1'></div>
+    <div class='col-xs-4 col-sm-2 col-md-1'></div>
+    <div class='col-xs-4 col-sm-2 col-md-1'>
+        <div class='nested-inner-grid'>
+            <div class='col-xs-4 col-sm-2 col-md-1'></div>
+            <div class='col-xs-4 col-sm-2 col-md-1'></div>
+            ....
+        </div>
+    </div>
+    <div class='col-xs-4 col-sm-2 col-md-1'></div>
+    ...
+</div>
+
+<script>
+  // Init outer grid first.
+  $('#nested-grid').gridstrap();
+  // Inner grid is identifiable via a class rather than an id.
+  // This is necessary because gridstrap creates a copy of all internal html elements
+  // and you cannot have two elements with the same id.
+  // By default the visible cells within the grid will have a 'gridstrap-cell-visible' class.
+  $('.gridstrap-cell-visible .nested-inner-grid').gridstrap();
+</script></code></pre>
+          </div>
+        </div>
+      </div>
+      <div role="tabpanel" class="tab-pane" id="resize-demo">
+        <div id="resize-grid">
+        </div>
+        <div class="row">
+          <div class="col-xs-12">
+            <pre><code class="language-javascript"><div id="resize-grid" class="row">
+  <div class="col-xs-2 cell"><div class="inner"><div class="resize"></div></div></div>
+  <div class="col-xs-2 cell"><div class="inner"><div class="resize"></div></div></div>
+  ...
+</div>
+
+<script>
+  $('#resize-grid').gridstrap({
+    resizeHandleSelector: '.resize'
+  });
+  // The above is all you need to do to enable resizing.
+  // However, the below shows how we can maintain Bootstrap's
+  // grid functionality.
+  var gs = $('#resize-grid').data('gridstrap');
+  $('#resize-grid').on('cellresize', function (e) {
+    e.preventDefault();
+
+    var index = gs.getCellIndexOfElement(e.target);
+
+    gs.modifyCell(index, function ($getVisibleCell, $getHiddenCell) {
+      var $hiddenCell = $getHiddenCell();
+
+      // Remove Bootstrap's column classes, then add ones appropriate
+      // to the cell's outer width.
+      for (var i = 1; i <= 12; i++) {
+        $hiddenCell.removeClass('col-xs-' + i);
+      }
+
+      $hiddenCell.addClass('col-xs-1');
+
+      var oneWidth = $hiddenCell.outerWidth();
+      for (var i = 2; i <= 12; i++) {
+        if ($hiddenCell.outerWidth() + oneWidth / 2 <= e.width) {
+          $hiddenCell.removeClass('col-xs-' + (i - 1));
+          $hiddenCell.addClass('col-xs-' + i);
+        } else {
+          $hiddenCell.removeClass('col-xs-' + i);
+        }
+      }
+    });
+  });
+</script></code></pre>
+          </div>
+        </div>
+      </div>
+      <div role="tabpanel" class="tab-pane" id="noncontiguous-demo">
+        <div id="noncontiguous-grid">
+        </div>
+        <div class="row">
+          <div class="col-xs-12">
+            <pre><code class="language-javascript"><div id="noncontiguous-grid">
+  <div class="col-xs-4 col-sm-2 col-md-1 cell"><div class="inner"></div></div>
+  <div class="col-xs-4 col-sm-2 col-md-1 cell"><div class="inner"></div></div> 
+  ...
+</div> 
+
+<script>
+  $('#noncontiguous-grid').gridstrap({
+    nonContiguousCellHtml: '<div class="col-xs-4 col-sm-2 col-md-1 cell"><div class="inner"></div></div>',
+    swapMode: true,
+    rearrangeOnDrag: false,
+    autoPadNonContiguousCells: false // We will explicitly init non-contiguous cells below.
+  });
+
+  var ncg = $('#noncontiguous-grid').data('gridstrap');
+  var $cells = ncg.$getCells();
+  var finalCellCount = 5 * 12; // 5 rows
+
+  // Create non-contiguous cells until the condition is met.
+  ncg.padWithNonContiguousCells(function (cellCount, nonContiguousCellCount) {
+    return cellCount < finalCellCount;
+  });
+
+  var moveRandomCell = function () {
+    var $cellToMove = $cells.eq(Math.floor(Math.random() * $cells.length));
+    var moveToIndex = Math.floor(Math.random() * finalCellCount);
+
+    ncg.moveCell($cellToMove, moveToIndex);
+  };
+
+  // Move some cells around to demonstrate effect.
+  moveRandomCell();
+  moveRandomCell();
+  moveRandomCell();
+  moveRandomCell();
+  moveRandomCell();
+</script></code></pre>
+          </div>
+        </div>
+      </div>
+      <div role="tabpanel" class="tab-pane" id="dual-demo">
+        <div class="row">
+          <div class="col-xs-5">
+            <div id="dual1-grid">
+            </div>
+          </div>
+          <div class="col-xs-2">
+            &nbsp;
+          </div>
+          <div class="col-xs-5">
+            <div id="dual2-grid">
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xs-12">
+            <pre><code class="language-javascript"><div id="dual1-grid" class="row">
+  <div class="col-xs-2 cell"><div class="inner"></div></div>
+  <div class="col-xs-2 cell"><div class="inner"></div></div> 
+  ...
+</div>
+<div id="dual2-grid" class="row">
+  <div class="col-xs-2 cell"><div class="inner"></div></div>
+  <div class="col-xs-2 cell"><div class="inner"></div></div> 
+  ...
+</div>
+
+<script>
+  $('#dual1-grid').gridstrap();
+  $('#dual2-grid').gridstrap();
+
+  $('#dual1-grid').data('gridstrap').setAdditionalGridstrapDragTarget('#dual2-grid');
+  $('#dual2-grid').data('gridstrap').setAdditionalGridstrapDragTarget('#dual1-grid'); 
+</script></code></pre>
+          </div>
+        </div>
+      </div>
+      <div role="tabpanel" class="tab-pane" id="custom-demo">
+        <div class="row" id="custom-grid">
+        </div>
+        <div class="row">
+          <div class="col-xs-12">
+            <pre><code class="language-javascript"><!-- Gridstrap can work without a Bootstrap grid -->
+<div id="custom-grid">
+  <div style="width: 47.9063px; height: 75px; background-color: rgb(150, 224, 183); left: 478.891px; top: 625.516px;"></div>
+  <div style="width: 17px; height: 75px; background-color: rgb(50, 214, 11); left: 448px; top: 635.516px;"></div>
+  ...
+</div>
+
+<script>
+  $('#custom-grid').gridstrap();
+</script></code></pre>
+          </div>
+        </div>
+      </div>
+      <div role="tabpanel" class="tab-pane" id="api-demo">
+        <div class="row" id="api-grid">
+        </div>
+        <div class="row">
+          <div class="col-xs-6 col-md-4">
+            <div class="checkbox">
+              <label>
+                <input type="checkbox" id="swap-mode" /> Swap mode
+              </label>
+            </div>
+            <div class="checkbox">
+              <label>
+                <input type="checkbox" id="rearrange-mode" checked="checked" /> Rearrange on drag
+              </label>
+            </div>
+            <div>
+              <button class="btn btn-default btn-lg" id="move">Move random cell</button>
+            </div>
+            <div>
+              <br />
+              <a href="//github.com/rosspi/gridstrap.js">More on github...</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+
+  <footer class="site-footer ">
+    <div class="container">
+      <div class="row">
+        <div class="col-xs-12">
+          Copyright © Ross P 2017
+        </div>
+      </div>
+    </div>
+    <br />
+  </footer>
+  <script src="//code.jquery.com/jquery-3.2.1.js"></script>
+
+  <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+    integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+    crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/prism/1.6.0/themes/prism.css" />
+
+  <script src="//cdnjs.cloudflare.com/ajax/libs/prism/1.6.0/prism.js"></script>
+  <!--<script src="../js.js" ></script>-->
+  <script src="./jquery.gridstrap.js"></script>
+  <script src="./indexscript.js"></script>
+
+</body>
+
+</html>
